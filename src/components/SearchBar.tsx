@@ -1,19 +1,21 @@
-import { searchBarStyles } from "@/styles/searchBar.styles"
-import { useState } from "react"
-import { Text, TextInput, TouchableOpacity, View } from "react-native"
+import { useState } from "react";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { searchBarStyles } from "@/styles/searchBar.styles";
 
 interface SearchBarProps {
-  onSearch?: (cityName: string) => void
-  loading?: boolean
+  onSearch: (cityName: string) => void;
+  loading?: boolean;
 }
 
-export default function SearchBar({onSearch, loading = false}: SearchBarProps) {
-  const [searchText, setSearchText] = useState("")
+export default function SearchBar({
+  onSearch,
+  loading = false,
+}: SearchBarProps) {
+  const [searchText, setSearchText] = useState("");
 
   const handleSearch = () => {
-    console.log(searchText);
-    
-  }
+    onSearch(searchText);
+  };
 
   return (
     <View style={searchBarStyles.container}>
@@ -36,11 +38,11 @@ export default function SearchBar({onSearch, loading = false}: SearchBarProps) {
           disabled={loading}
           style={searchBarStyles.button}
         >
-          <Text
-            style={searchBarStyles.buttonText}  
-          >{loading ? "Buscando..." : "Buscar"}</Text>
+          <Text style={searchBarStyles.buttonText}>
+            {loading ? "Buscando..." : "Buscar"}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
