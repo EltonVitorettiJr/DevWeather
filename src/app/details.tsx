@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 import { SafeAreaView } from "react-native-safe-area-context";
+import WeatherCard from "@/components/WeatherCard";
 import { getCurrencyWeather } from "@/services/weatherService";
 import { detailsStyles } from "@/styles/details.styles";
 import type { WeatherData } from "@/types/weather";
@@ -21,26 +21,30 @@ export default function Details() {
   const router = useRouter();
   const { cityName } = useLocalSearchParams<{ cityName: string }>();
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies:<Função de efeito colateral para buscar dados quando cityName muda>
-  useEffect(() => {
-    if (cityName) getWeatherData();
-    return;
-  }, [cityName]);
-
   const getWeatherData = async () => {
+    if (!cityName) return;
+
     setLoading(true);
     setError(null);
 
-    const result = await getCurrencyWeather(cityName);
+    const cityNameResult = await getCurrencyWeather(cityName);
+
+    console.log(cityNameResult);
 
     setLoading(false);
 
-    if (result.success) {
-      setWeatherData(result.data);
+    if (cityNameResult.success) {
+      setWeatherData(cityNameResult.data);
+      console.log(weatherData);
     } else {
-      setError(result.error);
+      setError(cityNameResult.error);
     }
   };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies:<Função de efeito colateral para buscar dados quando cityName muda>
+  useEffect(() => {
+    if (cityName) getWeatherData();
+  }, [cityName]);
 
   return (
     <SafeAreaView style={detailsStyles.safeArea}>
@@ -78,6 +82,10 @@ export default function Details() {
               </Text>
             </TouchableOpacity>
           </View>
+        )}
+
+        {!loading && !error && weatherData && (
+          <WeatherCard weather={weatherData} />
         )}
       </ScrollView>
     </SafeAreaView>

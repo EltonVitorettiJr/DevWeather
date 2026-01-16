@@ -1,46 +1,63 @@
 import { StyleSheet } from "react-native";
-import {colors, spacing, typography} from "./colors"
+import { colors, spacing, typography } from "./colors";
 
 export const homeStyles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.background
+    backgroundColor: colors.background,
   },
 
   container: {
-    flex: 1
+    flex: 1,
   },
 
   header: {
     paddingTop: spacing.xl,
     paddingBottom: spacing.md,
-    paddingHorizontal: spacing.md
+    paddingHorizontal: spacing.md,
   },
 
   title: {
     //colocado o spread operator pois o typography é um objeto, e não um valor único
     ...typography.title,
     color: colors.text,
-    textAlign: "center"
+    textAlign: "center",
   },
 
   subtitle: {
     ...typography.subtitle,
     color: colors.textSecondary,
     textAlign: "center",
-    marginTop: spacing.xs
+    marginTop: spacing.xs,
   },
 
   emptyContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: spacing.xl
+    padding: spacing.xl,
   },
 
   emptyText: {
     ...typography.body,
     color: colors.textLight,
-    textAlign: "center"
-  }
-})
+    textAlign: "center",
+  },
+
+  gpsButton: {
+    backgroundColor: colors.primary,
+    marginHorizontal: spacing.md,
+    marginTop: spacing.md,
+    paddingVertical: spacing.sm * 2,
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 48,
+  },
+
+  gpsButtonText: {
+    color: colors.background,
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});

@@ -1,25 +1,31 @@
 export const colors = {
   // Cores principais
-  primary: '#4A90E2',
-  primaryDark: '#357ABD',
+  primary: "#4A90E2",
+  primaryDark: "#357ABD",
 
   // Background
-  background: '#F5F5F5',
-  cardBackground: '#FFFFFF',
+  background: "#F5F5F5",
+  cardBackground: "#FFFFFF",
 
   // Texto
-  text: '#333333',
-  textSecondary: '#666666',
-  textLight: '#999999',
+  text: "#333333",
+  textSecondary: "#666666",
+  textLight: "#999999",
 
   // Status
-  error: '#E74C3C',
-  success: '#2ECC71',
-  warning: '#F39C12',
+  error: "#E74C3C",
+  success: "#2ECC71",
+  warning: "#F39C12",
 
   // Bordas
-  border: '#E0E0E0',
-  shadow: '#000000',
+  border: "#E0E0E0",
+  shadow: "#000000",
+
+  // Temperaturas
+  cold: "#3498DB",
+  cool: "#1ABC9C",
+  warm: "#F1C40F",
+  hot: "#E74C3C",
 };
 
 export const spacing = {
@@ -33,22 +39,22 @@ export const spacing = {
 export const typography = {
   title: {
     fontSize: 28,
-    fontWeight: '700' as const,
+    fontWeight: "700" as const,
   },
   subtitle: {
     fontSize: 20,
-    fontWeight: '600' as const,
+    fontWeight: "600" as const,
   },
   body: {
     fontSize: 16,
-    fontWeight: '400' as const,
+    fontWeight: "400" as const,
   },
   caption: {
     fontSize: 14,
-    fontWeight: '400' as const,
+    fontWeight: "400" as const,
   },
   small: {
     fontSize: 12,
-    fontWeight: '400' as const,
+    fontWeight: "400" as const,
   },
 };

@@ -1,15 +1,14 @@
 import { StyleSheet } from "react-native";
-import {colors, spacing, typography} from "./colors"
+import { colors, spacing } from "./colors";
 
 export const searchBarStyles = StyleSheet.create({
-  
   container: {
-    padding: spacing.md
+    padding: spacing.md,
   },
 
   inputContainer: {
     flexDirection: "row",
-    gap: spacing.md
+    gap: spacing.md,
   },
 
   input: {
@@ -20,7 +19,7 @@ export const searchBarStyles = StyleSheet.create({
     borderRadius: 12,
     padding: spacing.md,
     fontSize: 16,
-    color: colors.text
+    color: colors.text,
   },
 
   button: {
@@ -29,13 +28,12 @@ export const searchBarStyles = StyleSheet.create({
     padding: spacing.md,
     paddingHorizontal: spacing.lg,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
 
   buttonText: {
     color: colors.cardBackground,
     fontSize: 16,
-    fontWeight: "600"
-  }
-
-})
+    fontWeight: "600",
+  },
+});

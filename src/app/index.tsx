@@ -1,17 +1,52 @@
 import { useRouter } from "expo-router";
-import { ScrollView, StatusBar, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchBar from "@/components/SearchBar";
+import { useLocation } from "@/hooks/useLocation";
+import { getWeatherByCoordinates } from "@/services/weatherService";
 import { homeStyles } from "@/styles/home.styles";
 
 export default function App() {
   const router = useRouter();
+  const { getLocation, loading } = useLocation();
 
   const handleSearch = (cityName: string) => {
     router.push({
       pathname: "/details",
       params: { cityName },
     });
+  };
+
+  const handleLocation = async () => {
+    const locationResult = await getLocation();
+
+    if (!locationResult.success) {
+      Alert.alert(locationResult.error);
+      return;
+    }
+
+    const { latitude, longitude } = locationResult.coordinates;
+
+    const dataResult = await getWeatherByCoordinates(latitude, longitude);
+
+    if (!dataResult.success) {
+      Alert.alert(dataResult.error);
+
+      return;
+    } else {
+      router.push({
+        pathname: "/details",
+        params: { cityName: dataResult.data.name },
+      });
+    }
   };
 
   return (
@@ -28,6 +63,16 @@ export default function App() {
         </View>
 
         <SearchBar onSearch={handleSearch} />
+
+        <TouchableOpacity onPress={handleLocation} style={homeStyles.gpsButton}>
+          {loading ? (
+            <ActivityIndicator color={"#fff"} size={"small"} />
+          ) : (
+            <Text style={homeStyles.gpsButtonText}>
+              Use minha localização atual
+            </Text>
+          )}
+        </TouchableOpacity>
 
         <View style={homeStyles.emptyContainer}>
           <Text style={homeStyles.emptyText}>

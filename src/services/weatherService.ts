@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
-import type { WeatherData } from "@/types/weather";
+import axios from "axios";
+import type { WeatherData, WeatherError } from "@/types/weather";
 
 export type WeatherResult =
   | { success: true; data: WeatherData }
@@ -13,7 +13,7 @@ const api = axios.create({
   params: {
     appid: API_KEY,
     lang: "pt_br",
-    units: "metrics",
+    units: "metric",
   },
   timeout: 10000,
   headers: { "Content-Type": "application/json" },
@@ -31,6 +31,49 @@ const getErrorMessage = (statusCode: number): string => {
       return "Servidor não disponível no momento.";
     default:
       return "Erro no servidor. Tente novamente mais tarde.";
+  }
+};
+
+export const getWeatherByCoordinates = async (
+  latitude: number,
+  longitude: number,
+): Promise<WeatherResult> => {
+  try {
+    const response = await api.get<WeatherData>("/weather", {
+      params: {
+        lat: latitude,
+        lon: longitude,
+      },
+    });
+
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (err) {
+    if (axios.isAxiosError<WeatherError>(err)) {
+      if (err.response) {
+        return {
+          success: false,
+          error: getErrorMessage(err.response.status),
+        };
+      } else if (err.request) {
+        return {
+          success: false,
+          error: "Erro de conexão com o servidor. Tente novamente.",
+        };
+      } else {
+        return {
+          success: false,
+          error: "Erro ao buscar dados do clima. Tente novamente.",
+        };
+      }
+    }
+
+    return {
+      success: false,
+      error: "Erro ao buscar dados do clima. Tente novamente.",
+    };
   }
 };
 
@@ -59,7 +102,7 @@ export const getCurrencyWeather = async (
       data: response.data,
     };
   } catch (err) {
-    if (axios.isAxiosError(err)) {
+    if (axios.isAxiosError<WeatherError>(err)) {
       if (err.response) {
         return {
           success: false,
@@ -83,4 +126,8 @@ export const getCurrencyWeather = async (
       error: "Erro ao buscar dados do clima. Tente novamente.",
     };
   }
+};
+
+export const getWeatherIcon = (iconCode: string): string => {
+  return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 };
