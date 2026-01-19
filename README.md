@@ -9,9 +9,9 @@
   <a href="#computer-tecnologias-usadas">Tecnologias Usadas</a> | 
   <a href="#package-como-rodar-o-projeto-localmente">Como Rodar</a>
 </p>
-
-<img src="https://res.cloudinary.com/dtgimo0rh/image/upload/celular-computador-imagem_2_ggmt6u.png" alt="Imagem representativa do app"/>
-
+<div align="center">
+  <img src="https://res.cloudinary.com/dtgimo0rh/image/upload/celular-computador-imagem_2_ggmt6u.png" alt="Imagem representativa do app"/>
+</div>
 <br>
 
 # :art: Sobre o Projeto
