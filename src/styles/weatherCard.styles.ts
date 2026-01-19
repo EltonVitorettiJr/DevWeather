@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { colors, spacing, typography } from "./colors";
 
-export const changeColor = (temp: number) => {
+export const changeColor = (temp: number): string | undefined => {
   if (temp <= 0) return colors.cold;
   if (temp > 0 && temp <= 15) return colors.cool;
   if (temp > 15 && temp <= 25) return colors.warm;
@@ -10,12 +10,19 @@ export const changeColor = (temp: number) => {
 
 export const weatherCardStyles = StyleSheet.create({
   card: {
-    backgroundColor: colors.cardBackground,
-    borderRadius: 16,
+    borderRadius: 24,
     padding: spacing.lg,
     marginVertical: spacing.sm,
     marginHorizontal: spacing.md,
     alignItems: "center",
+    shadowColor: colors.shadow, //Sombra no iOS
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.1, //Sombra suave
+    shadowRadius: 12,
+    elevation: 5, //Sombra para Android
   },
 
   cityName: {

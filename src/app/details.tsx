@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -11,6 +12,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import WeatherCard from "@/components/WeatherCard";
 import { getCurrencyWeather } from "@/services/weatherService";
+import { colors } from "@/styles/colors";
 import { detailsStyles } from "@/styles/details.styles";
 import type { WeatherData } from "@/types/weather";
 
@@ -35,13 +37,12 @@ export default function Details() {
 
     if (cityNameResult.success) {
       setWeatherData(cityNameResult.data);
-      console.log(weatherData);
     } else {
       setError(cityNameResult.error);
     }
   };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies:<Função de efeito colateral para buscar dados quando cityName muda>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <Função de efeito colateral para buscar dados quando cityName muda>
   useEffect(() => {
     if (cityName) getWeatherData();
   }, [cityName]);
@@ -72,6 +73,11 @@ export default function Details() {
 
         {error && (
           <View style={detailsStyles.errorContainer}>
+            <Ionicons
+              name="cloud-offline-outline"
+              size={80}
+              color={colors.textSecondary}
+            />
             <Text style={detailsStyles.errorText}>{error}</Text>
             <TouchableOpacity
               style={detailsStyles.retryButton}

@@ -56,21 +56,35 @@ export const detailsStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: spacing.md,
+    paddingVertical: spacing.xl,
+    paddingHorizontal: spacing.lg,
+  },
+
+  errorTitle: {
+    ...typography.title,
+    color: colors.text,
+    marginTop: spacing.md,
+    marginBottom: spacing.xs,
+    textAlign: "center",
   },
 
   errorText: {
-    color: colors.error,
-    marginBottom: spacing.md,
+    ...typography.body,
+    color: colors.textSecondary,
     textAlign: "center",
-    fontSize: 16,
+    marginBottom: spacing.lg,
   },
 
   retryButton: {
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.xl,
     backgroundColor: colors.primary,
-    borderRadius: 6,
+    borderRadius: 12,
+    elevation: 2, //sombra no android
+    shadowColor: colors.shadow, //sombra no ios
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
 
   retryButtonText: {
