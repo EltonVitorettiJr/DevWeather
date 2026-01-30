@@ -15,14 +15,12 @@ export const weatherCardStyles = StyleSheet.create({
     marginVertical: spacing.sm,
     marginHorizontal: spacing.md,
     alignItems: "center",
-    shadowColor: colors.shadow, //Sombra no iOS
     shadowOffset: {
       width: 0,
       height: 4,
     },
-    shadowOpacity: 0.1, //Sombra suave
     shadowRadius: 12,
-    elevation: 5, //Sombra para Android
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
 
   cityName: {
